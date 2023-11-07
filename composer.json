@@ -1,0 +1,23 @@
+{
+    "name": "clearswitch/dragon-ball-laraver",
+    "description": "laravel package",
+    "type": "library",
+    "require": {
+        "godruoyi/php-snowflake": "latest",
+        "phpmailer/phpmailer": "latest",
+        "laravel-lang/lang": "latest",
+        "monolog/monolog": "latest"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Clearswitch\\DragonBallLaraver\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "clearswitch"
+        }
+    ],
+    "minimum-stability": "dev"
+}
