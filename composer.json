@@ -3,10 +3,10 @@
     "description": "laravel package",
     "type": "library",
     "require": {
-        "godruoyi/php-snowflake": "latest",
-        "phpmailer/phpmailer": "latest",
-        "laravel-lang/lang": "latest",
-        "monolog/monolog": "latest"
+        "godruoyi/php-snowflake": "^3.0",
+        "phpmailer/phpmailer": "^6.8",
+        "laravel-lang/lang": "^13.4",
+        "monolog/monolog": "^3.4"
     },
     "license": "MIT",
     "autoload": {
