@@ -6,6 +6,7 @@
 
 - php >=8.0
 - Laravel >10
+- redis
 
 # 优化的功能
 
