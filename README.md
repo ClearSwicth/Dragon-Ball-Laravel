@@ -162,3 +162,93 @@
        }
   }
 ```
+
+- request
+
+> JsonRequest ,ListRequest,QueryRequest
+> JsonRequest 对应的json请求
+> QueryRequest 对应的是Get的请求
+> ListRequest 对应的是类表请求
+
+```php
+use ClearSwitch\DragonBallLaravel\Requests\JsonRequest;
+class Login extends JsonRequest 
+{
+    public function rules()
+    {
+        return [];
+    }
+    public function attributes()
+    {
+        return [];
+    }
+}
+//Controller
+   use Login 
+   public function login(Login $request)
+    {
+        //获得请求数据通过的数据
+        $data = $request->validated(); 
+    }
+```
+
+> ListRequest 的应用
+
+```php
+ use ClearSwitch\DragonBallLaravel\Requests\ListRequest;
+   class order extends ListRequest 
+  {
+    public function rules()
+    {
+        return [];
+    }
+    public function attributes()
+    {
+        return [];
+    }
+}
+```
+
+> 控制器
+
+```php
+   use ClearSwitch\DragonBallLaravel\Controllers\AbstractController;
+   use ClearSwitch\DragonBallLaravel\Component\DataProvider;
+   use ClearSwitch\DragonBallLaravel\Component\DataFilter;
+   class order extends AbstractController{
+     $filter = (new DataFilter($data))
+            ->addRule('waybill', '=', 'waybill')
+            ->addRule('orderId', '=', 'orderId')
+            ->addRule('start_time', '>=', 'addTime')
+            ->addRule('end_time', '<=', 'addTime');
+        $provider = (new DataProvider($builder, $filter))
+            ->setColumns(['waybill', 'orderId', 'codCurrency', 'consigneeCountry', 'addTime', 'codAmount'])
+            ->addSort('addTime')
+            ->setSerializer(function ($rows) {
+                $result = [];
+                foreach ($rows as $row) {
+                    $order = $row->getAttributes();
+                    $result[] = $order;
+                }
+                return $result;
+            });
+        return $this->send($provider);
+   }
+```
+
+> 列表返回的格式
+
+```json
+  {
+  "code": 200,
+  "data": {
+    "page": 1,
+    "page_size": 20,
+    "last_page": 1,
+    "count": 1,
+    "rows": [
+    ]
+  },
+  "message": "Success"
+}
+```
