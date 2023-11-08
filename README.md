@@ -19,7 +19,9 @@
     
     }
   ```
->  模型都必须继承
+
+> 模型都必须继承
+
 ```php
    use ClearSwitch\DragonBallLaravel\Models\AbstractMode;
    class User extends AbstractMode
@@ -27,6 +29,7 @@
     use AuthenticatableTrait;
   }
 ```
+
 > 添加数据的数据的时候,如果没填写主键值,自动添加用雪花规格自动补充主键
 
 ```php
@@ -81,6 +84,7 @@
 ```
 
 > 做好这些就可以在auth.php 配置文件中就可以配置叫token的驱动
+
 ```php
   //例如
  'api' => [
@@ -89,11 +93,15 @@
             'hash' => false,//false true
          ],
 ```
+
 > 路由使用token的守卫
+
 ```php
     Route::middleware('auth')->group(function () {});
 ```
+
 > 用户认证器的模型需要调用
+
 ```php
     use ClearSwitch\DragonBallLaravel\Traits\AuthenticatableTrait;
     use ClearSwitch\DragonBallLaravel\Models\AbstractMode;
@@ -102,12 +110,17 @@
     use AuthenticatableTrait;
   }
 ```
+
 > 获得验证通过的用户
+
 ```php
    auth('api')->user()
 ```
-# 缓存
+
+- 缓存
+
 > 在cache.php 配置中增加一个驱动，这个驱动是token用的
+
 ```php
    'token_file' => [
             'driver' => 'token_file',
@@ -115,8 +128,10 @@
       ],
 ```
 
-# 异常提企业微信和邮箱
->在config 目录中配置文件 文件名字 robot.php
+- 异常提企业微信和邮箱
+
+> 在config 目录中配置文件 文件名字 robot.php
+
 ```php
    return [
     'qy_we_chat' => [
@@ -133,7 +148,9 @@
     ]
 ];
 ```
+
 > 调用
+
 ```php
   use  ClearSwitch\DragonBallLaravel\Traits\Robot
   class sendMessage{
