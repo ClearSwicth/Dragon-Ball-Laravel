@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\Service\SendMessage\QyWeChat;
 
-use App\Exceptions\ValidationException;
+use Clearswitch\DragonBallLaraver\Validations\ValidationException;
 use ClearSwitch\DragonBallLaravel\Service\SendMessage\MessageFactory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
@@ -35,8 +35,8 @@ class QyWeChatSend implements MessageFactory
      */
     public function getToken()
     {
-        $corpid = "ww3c80f3c2c732860f";
-        $corpsecret = "Iujz6qk3L_hcKOyOrRf2koc61oJboI51oJrmmqm4UEo";
+        $corpid = config('robot.qy_we_chat.corpid');
+        $corpsecret = config('robot.qy_we_chat.corpsecret');
         $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" . $corpid . "&corpsecret=" . $corpsecret;
         $response = Http::get($url);
         if ($response->ok()) {
@@ -73,8 +73,7 @@ class QyWeChatSend implements MessageFactory
 
     public function sendMessage(...$args)
     {
-        // $sendData['touser'] = "DaiKai|20200701001|ZhouXiaoLin|18938825816|fish-YeQianRu|miya";
-        $sendData['touser'] = "DaiKai";
+        $sendData['touser'] = config('robot.qy_we_chat.touser');
         $sendData['toparty'] = "";
         $sendData['totag'] = "";
         $sendData['msgtype'] = "text";

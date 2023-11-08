@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\AuthService\Guard;
 
-use App\Exceptions\ValidationException;
+use Clearswitch\DragonBallLaraver\Validations\ValidationException;
 use ClearSwitch\DragonBallLaravel\Utils\Token;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;

@@ -21,14 +21,14 @@ class EmailSend implements MessageFactory
 
     function mailSentCC($title, $text, $cc_list, $sent_mail = '', $sent_name = '')
     {
-        $username = 'alert@yicencorp.com';
-        $password = '3HfYQqWe3TmyM4Za';
-        $sender = 'Alert';
+        $username = config('robot.mail.username');
+        $password = config('robot.mail.password');
+        $sender = config('robot.mail.sender');
         $mail = new PHPMailer(true);
         $mail->CharSet = "UTF-8";                     //设定邮件编码
         $mail->SMTPDebug = 0;                        // 调试模式输出
         $mail->isSMTP();                             // 使用SMTP
-        $mail->Host = 'smtp.exmail.qq.com';                // SMTP服务器
+        $mail->Host = config('robot.mail.host');             // SMTP服务器
         $mail->SMTPAuth = true;                      // 允许 SMTP 认证
         $mail->Username = $username;                // SMTP 用户名  即邮箱的用户名
         $mail->Password = $password;             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
