@@ -11,7 +11,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "ClearSwitch\\DragonBallLaraver\\": "src/"
+            "ClearSwitch\\DragonBallLaravel\\": "src/"
         }
     },
     "authors": [
