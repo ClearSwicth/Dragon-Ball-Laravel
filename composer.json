@@ -19,5 +19,5 @@
             "name": "clearswitch"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "^1.0"
 }
