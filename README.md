@@ -252,3 +252,10 @@ class Login extends JsonRequest
   "message": "Success"
 }
 ```
+
+- 日志
+> 日志使用的 monolog 
+```php
+   use ClearSwitch\DragonBallLaravel\Traits\Log
+   $this->log()->info();
+```
