@@ -1,5 +1,5 @@
 {
-    "name": "clearswitch/dragon-ball-laraver",
+    "name": "clearswitch/dragon-ball-laravel",
     "description": "laravel package",
     "type": "library",
     "require": {
