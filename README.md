@@ -27,7 +27,7 @@
    use ClearSwitch\DragonBallLaravel\Models\AbstractMode;
    class User extends AbstractMode
   {
-    use AuthenticatableTrait;
+  
   }
 ```
 
@@ -104,11 +104,11 @@
 > 用户认证器的模型需要调用
 
 ```php
-    use ClearSwitch\DragonBallLaravel\Traits\AuthenticatableTrait;
+    use Illuminate\Contracts\Auth\Authenticatable;
     use ClearSwitch\DragonBallLaravel\Models\AbstractMode;
-   class User extends AbstractMode
+   class User extends AbstractMode implements  Authenticatable
   {
-    use AuthenticatableTrait;
+     
   }
 ```
 
