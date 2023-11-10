@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\Middleware;
 
-use Clearswitch\DragonBallLaraver\Validations\ValidationException;
+use ClearSwitch\DragonBallLaravel\Validations\ValidationException;
 use Closure;
 use Illuminate\Support\Facades\Validator;
 

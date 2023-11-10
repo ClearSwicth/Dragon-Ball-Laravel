@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\AuthService\Guard;
 
-use Clearswitch\DragonBallLaraver\Validations\ValidationException;
+use ClearSwitch\DragonBallLaravel\Validations\ValidationException;
 use ClearSwitch\DragonBallLaravel\Utils\Token;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
@@ -134,7 +134,6 @@ class TokenGuard implements Guard
         if ($userToken) {
             Cache::store('token_file')->forget($userToken);
         }
-        //Cache::add($token, $user, $this->getExpires() - time());
         Cache::store('token_file')->add($token, $user, $this->getExpires() - time());
         $user->login_at = $loginTime;
         $user->token = $token;
@@ -166,23 +165,22 @@ class TokenGuard implements Guard
             $token = $this->request->bearerToken();
             if (empty($token)) {
                 throw new ValidationException("Missing Bearer Token", 401);
-            }
+            };
             //解析token 查找用户;
             if ($parse = Token::parse($token)) {
                 $parseData = explode("&", $parse);
                 if (count($parseData) == 2) {
                     if ($parseData[1] > time()) {
                         return Cache::store('token_file')->get($token);
-                        //return $this->provider->retrieveById($parseData[0]);
                     } else {
                         Cache::store('token_file')->forget($token);
-                        return false;
+                        return null;
                     }
                 } else {
-                    return false;
+                    return null;
                 }
             } else {
-                return false;
+                return null;
             }
         } else {
             return true;

@@ -77,7 +77,7 @@ class Token
     public static function generate(string $string)
     {
         //openssl_random_pseudo_bytes(16)
-        return base64_encode(openssl_encrypt(
+        return self::bas64Encode(openssl_encrypt(
             $string,
             self::getMethod(),
             self::getKey(),
@@ -98,11 +98,40 @@ class Token
             return false;
         }
         return openssl_decrypt(
-            base64_decode($token),
+            self::base64Decode($token),
             self::getMethod(),
             self::getKey(),
             self::$options,
             self::getVi()
         );
+    }
+
+    /**
+     * 编码
+     * @param $str
+     * @return array|string|string[]
+     * @author SwitchSwitch
+     */
+    public static function bas64Encode($str)
+    {
+        return str_replace('=', '', base64_encode($str));
+    }
+
+    /**
+     * 解码
+     * @param $str
+     * @return false|string
+     * @author SwitchSwitch
+     */
+    public static function base64Decode($str)
+    {
+        $strlength = mb_strlen($str);
+        $remainder = $strlength % 4;
+        if ($remainder === 0) {
+            return base64_decode($str);
+        } else {
+            $equals = str_repeat('=', 4-$remainder);
+            return base64_decode($str . $equals);
+        }
     }
 }

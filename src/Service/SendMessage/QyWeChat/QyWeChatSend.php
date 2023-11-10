@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\Service\SendMessage\QyWeChat;
 
-use Clearswitch\DragonBallLaraver\Validations\ValidationException;
+use ClearSwitch\DragonBallLaravel\Validations\ValidationException;
 use ClearSwitch\DragonBallLaravel\Service\SendMessage\MessageFactory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;

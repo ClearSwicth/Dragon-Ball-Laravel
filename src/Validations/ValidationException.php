@@ -6,7 +6,7 @@
  * Creat by ClearSwitch
  */
 
-namespace Clearswitch\DragonBallLaraver\Validations;
+namespace ClearSwitch\DragonBallLaravel\Validations;
 
 class ValidationException extends \Exception
 {
