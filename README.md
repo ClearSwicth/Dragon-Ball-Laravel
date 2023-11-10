@@ -259,3 +259,10 @@ class Login extends JsonRequest
    use ClearSwitch\DragonBallLaravel\Traits\Log
    $this->log()->info();
 ```
+- 事件
+- 配置好企业微信之后直接调用异常事件
+```php
+ use ClearSwitch\DragonBallLaravel\Events\ErrorWarnEvent;
+ event(new ErrorWarnEvent(['message' =>"错误信息", 'code' =>"code", 'file' =>"那个文件", 'line' =>'那一行']));
+
+```
