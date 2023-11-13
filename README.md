@@ -254,15 +254,55 @@ class Login extends JsonRequest
 ```
 
 - 日志
-> 日志使用的 monolog 
+
+> 日志使用的 monolog
+
 ```php
    use ClearSwitch\DragonBallLaravel\Traits\Log
    $this->log()->info();
 ```
+
 - 事件
 - 配置好企业微信之后直接调用异常事件
+
 ```php
  use ClearSwitch\DragonBallLaravel\Events\ErrorWarnEvent;
  event(new ErrorWarnEvent(['message' =>"错误信息", 'code' =>"code", 'file' =>"那个文件", 'line' =>'那一行']));
 
+```
+
+- 常量
+
+> 版本大于1.1.0
+> 增加了对常量的支持,且支持常量缓存
+
+```php
+class OrderStatus extends AbstractConstant
+{
+    /**
+     * @Message("等待")
+     */
+    const WAIT = 1;
+
+    /**
+     * @Message("发货")
+     */
+    const SHIP = 2;
+}
+```
+
+> 启用缓存 默认不支持缓存
+
+```php
+   HAS_CONSTANT_CACHE=true
+```
+
+> 可以使用的方法
+```php
+  //获得所有常量的数组
+   OrderStatus::list();
+  //获得常量标签
+   OrderStatus::messages();
+  //获得常量的注解 get+标签名字(常量值)
+   OrderStatus::getMessage(1);
 ```
