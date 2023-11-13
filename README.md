@@ -285,7 +285,7 @@ class OrderStatus extends AbstractConstant
     const WAIT = 1;
 
     /**
-     * @Message("刘骚骚")
+     * @Message("发货")
      */
     const SHIP = 2;
 }
