@@ -14,10 +14,12 @@ use Monolog\Logger;
 
 trait Log
 {
-    public function log()
+    public function log($fileName = null)
     {
         $log = new Logger('log');
-        $fileName = storage_path($this->getPath());
+        if (!$fileName) {
+            $fileName = storage_path($this->getPath());
+        }
         $dateFormat = "Y-m-d H:i:s";
         $output = "[%datetime%] %level_name%:%message% %context% %extra%\n";
         $formatter = new LineFormatter($output, $dateFormat);
