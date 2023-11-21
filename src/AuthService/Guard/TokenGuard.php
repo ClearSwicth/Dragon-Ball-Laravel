@@ -50,7 +50,7 @@ class TokenGuard implements Guard
      */
     public function getExpires()
     {
-        if (!empty(config('token.expires'))) {
+        if (!empty(config('dragonBallLaravel.token.expires'))) {
             return time() + config('token.expires');
         } else {
             return now()->addYear(100)->getTimestamp();

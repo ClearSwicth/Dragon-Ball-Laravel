@@ -19,7 +19,7 @@ class QueryListener
      */
     public function handle(QueryExecuted $event)
     {
-        if (Config('database.print_sql')) {
+        if (Config('dragonBallLaravel.print_sql')) {
             $s = str_replace('?', '%s', $event->sql);
             $bindings = array_map(function ($binding) {
                 if (is_string($binding) || is_object($binding)) {

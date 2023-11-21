@@ -115,4 +115,23 @@ abstract class AbstractMode extends Model
         $this->mergeAttributesFromCachedCasts();
         return $this->attributes;
     }
+
+
+    public function getCreatedAtAttribute($value)
+    {
+        if (Config('dragonBallLaravel.formatYmdHis')) {
+            return $this->asDateTime($value)->timezone(config('app.timezone'))->format('Y-m-d H:i:s');
+        } else {
+            return $value;
+        }
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        if (Config('dragonBallLaravel.formatYmdHis')) {
+            return $this->asDateTime($value)->timezone(config('app.timezone'))->format('Y-m-d H:i:s');
+        } else {
+            return $value;
+        }
+    }
 }

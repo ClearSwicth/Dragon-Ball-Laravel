@@ -7,6 +7,7 @@
  */
 
 namespace ClearSwitch\DragonBallLaravel\Constants;
+
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -24,7 +25,7 @@ class AbstractConstant
      */
     protected static function getConstant()
     {
-        if (env('HAS_CONSTANT_CACHE')) {
+        if (Config('dragonBallLaravel.has_constant_cache')) {
             if ($constants = Cache::get(basename(str_replace('\\', '/', static::class)))) {
                 return unserialize($constants)->getConstants();
             } else {

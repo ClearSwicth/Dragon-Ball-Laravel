@@ -41,12 +41,12 @@ class Token
      */
     public static function getKey()
     {
-        return self::$key = config('token.tokenKey');
+        return self::$key = config('dragonBallLaravel.token.tokenKey');
     }
 
     public static function getVi()
     {
-        return self::$vi = config('token.vi');
+        return self::$vi = config('dragonBallLaravel.token.vi');
     }
 
     /**

@@ -73,15 +73,23 @@
 > token 使用的openssl 加密和解密,需要定义创建一个token的配置文件
 
 ```php
-   //在app/config 的目录下增加一个token.php 的文件,配置如下
+   //在app/config 的目录下增加一个dragonBallLaravel.php 的文件,配置如下
    return [
-    //定义自己的加密密钥
-    'tokenKey' => env("TOKEN_KEY", 'JVLNCYUupnPqgJ$x3t92$#6RMcm7F%rk'),
-    //定义自己加密的时候的偏移量
-    'vi' => env('TOKEN_VI', 'jSjJax*^gmZNa4r&')
-    //定义token的过期时间
-    'expires' => env('EXPIRES', now()->addYear(100))
-    ];
+    //模型中的时间结果是否是Y-m-d H:i:s
+    'formatYmdHis' => env('FORMAT_YMDHIS', false),
+    //常量是否启用缓存
+    'has_constant_cache' => env('HAS_CONSTANT_CACHE', true),
+    //是否打印sql 
+    'print_sql' => env('PRINT_SQL', false),
+    //token的配置
+    'token' => [
+        //定义自己的加密密钥
+        'tokenKey' => env("TOKEN_KEY", 'JVLNCYUupnPqgJ$x3t92$#6RMcm7F%rk'),
+        //定义自己加密的时候的偏移量
+        'vi' => env('TOKEN_VI', 'jSjJax*^gmZNa4r&'),
+         //定义token的过期时间
+        'expires' => env('EXPIRES', now()->addYear(100))
+    ]
 ```
 
 > 做好这些就可以在auth.php 配置文件中就可以配置叫token的驱动
