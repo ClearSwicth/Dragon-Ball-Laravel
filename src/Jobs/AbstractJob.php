@@ -8,7 +8,7 @@
 
 namespace ClearSwitch\DragonBallLaravel\Jobs;
 
-use App\Traits\Log;
+use ClearSwitch\DragonBallLaravel\Traits\Log;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Bus\Dispatcher;
@@ -21,6 +21,7 @@ abstract class AbstractJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     use Log;
+
     /**
      * 便于把实例添加到队列中
      * @author ClearSwitch
@@ -176,7 +177,7 @@ abstract class AbstractJob implements ShouldQueue
     public function getAmqpObj()
     {
         $dispatcher = app(Dispatcher::class);
-        $reflection = new ReflectionClass($dispatcher);
+        $reflection = new \ReflectionClass($dispatcher);
         $property = $reflection->getProperty('queueResolver');
         $property->setAccessible(true);
         $queueResolver = $property->getValue($dispatcher);
@@ -192,7 +193,7 @@ abstract class AbstractJob implements ShouldQueue
      */
     public function createAmqpQueue($queue)
     {
-        $reflectionClassAmqp = new ReflectionClass($queue);
+        $reflectionClassAmqp = new \ReflectionClass($queue);
         $publishPropertiesMethod = $reflectionClassAmqp->getMethod('publishProperties');
         $declareDestinationMethod = $reflectionClassAmqp->getMethod('declareDestination');
         $publishPropertiesMethod->setAccessible(true);
