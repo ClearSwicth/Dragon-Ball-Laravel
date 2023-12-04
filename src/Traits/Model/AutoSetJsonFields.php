@@ -18,11 +18,13 @@ trait AutoSetJsonFields
         $table = $this->getTable();
         $arrayColumn = Cache::remember($table, 60, function () use ($table) {
             $arrayColumn = [];
-            $columns = Schema::getColumnListing($table);
+            // $columns = Schema::getColumnListing($table);
+            $columns = Schema::getColumns($table);
             foreach ($columns as $column) {
-                $type = Schema::getColumnType($table, $column);
+                //$type = Schema::getColumnType($table, $column);
+                $type = $column['type_name'];
                 if ($type === 'json' || $type === 'jsonb') {
-                    $arrayColumn[] = $column;
+                    $arrayColumn[] = $column['name'];
                 }
             }
             return $arrayColumn;
