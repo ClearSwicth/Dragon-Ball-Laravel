@@ -21,11 +21,28 @@ class ListRequest extends QueryRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-            'page' => 1,
-            'page_size' => 1000
-        ]);
+//        $this->merge([
+//            'page' => 1,
+//            'page_size' => 1000
+//        ]);
     }
+
+    protected function passedValidation()
+    {
+        $passData = $this->validated();
+        if (empty($passData['page'])) {
+            $this->merge([
+                'page' => 1,
+            ]);
+        }
+        if (empty($passData['page_size'])) {
+            $this->merge([
+                'page_size' => 1000,
+            ]);
+        }
+    }
+
+
     /**
      * Date: 2022/6/9 下午2:05
      * @param ValidationFactory $factory
