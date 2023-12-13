@@ -9,6 +9,8 @@
 namespace ClearSwitch\DragonBallLaravel\Listeners;
 
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class QueryListener
 {
@@ -20,19 +22,21 @@ class QueryListener
     public function handle(QueryExecuted $event)
     {
         if (Config('dragonBallLaravel.print_sql')) {
-            $s = str_replace('?', '%s', $event->sql);
-            $bindings = array_map(function ($binding) {
-                if (is_string($binding) || is_object($binding)) {
-                    return "\"{$binding}\"";
+            $sql = $event->sql;
+            if (!Arr::isAssoc($event->bindings)) {
+                $placeholder = md5(random_bytes(64));
+                foreach ($event->bindings as $value) {
+                    if (is_null($value)) {
+                        $value = 'null';
+                    } else if (is_int($value) || is_float($value)) {
+                        $value = (string) $value;
+                    } else {
+                        $value = "'" . str_replace('?', $placeholder, $value) . "'";
+                    }
+                    $sql = Str::replaceFirst('?', $value, $sql);
                 }
-                return $binding;
-            }, $event->bindings);
-//            $sql = $this->addColor(sprintf($s, ...$bindings), "\033[32m");
-//            $nowTime = $this->addColor('(' . date("Y-m-d H:i:s", time()) . ')', "\033[36m");
-//            $connectionName = $this->addColor($event->connectionName, "\033[34m");
-//            $time = $this->addColor("(time:$event->time" . "ms)", "\033[33m");
-//            $str = $nowTime . $connectionName . $time . $sql . PHP_EOL;
-            $sql = $this->addSpace(sprintf($s, ...$bindings));
+                $sql = str_replace($placeholder, '?', $sql);
+            }
             $nowTime = $this->addSpace('(' . date("Y-m-d H:i:s", time()) . ')');
             $connectionName = $this->addSpace($event->connectionName);
             $time = $this->addSpace("(time:$event->time" . "ms)");
