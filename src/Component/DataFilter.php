@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DataFilter.php
  * 文件描述
@@ -360,9 +361,9 @@ class DataFilter
             $this->buildWhere($builder, $rule);
         }
         foreach ([
-                     'hasRules' => 'whereHas',
-                     'doesntHaveRules' => 'whereDoesntHave'
-                 ] as $type => $method) {
+            'hasRules' => 'whereHas',
+            'doesntHaveRules' => 'whereDoesntHave'
+        ] as $type => $method) {
             foreach ($this->getActiveRelationRules($type) as $relation => $rules) {
                 call_user_func([$builder, $method], $relation, function ($builder2) use ($rules) {
                     foreach ($rules as $rule) {
@@ -506,6 +507,14 @@ class DataFilter
                         }
                         foreach ($fields as $field) {
                             $query->whereIn($field, $rule['value'], $boolean);
+                        }
+                        break;
+                    case 'or':
+                        if (!is_array($rule['value'])) {
+                            $rule['value'] = [$rule['value']];
+                        }
+                        foreach ($fields as $field) {
+                            $query->orWhere($field, $rule['value'], $boolean);
                         }
                         break;
                     default:
