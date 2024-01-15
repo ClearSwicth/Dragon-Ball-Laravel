@@ -63,7 +63,6 @@ abstract class AbstractJob implements ShouldQueue
      */
     public $timeout = 100;
 
-
     /**
      * 载荷数据
      * @var
@@ -76,16 +75,14 @@ abstract class AbstractJob implements ShouldQueue
     public function __construct($payloadData = null)
     {
         $this->payloadData = $payloadData;
-        //$this->setQueue()->setConnection();
         $this->prepare();
     }
-
     /**
      * 队列执行逻辑
      * @return mixed
      * @author SwitchSwitch
      */
-    abstract public function handle();
+    // abstract public function handle();
 
     /**
      * 设置最大连接次数
@@ -118,18 +115,21 @@ abstract class AbstractJob implements ShouldQueue
      */
     public function failed(Throwable $exception): void
     {
-        //Log::debug($exception->getMessage());
-        var_dump($exception->getMessage());
+        $this->log()->debug($exception->getMessage());
     }
 
     public function getJobName()
     {
-        $className = static::class;
-        $pos = strrpos($className, '\\');
-        if ($pos !== false) {
-            $className = substr($className, $pos + 1);
+        if ($this->queue) {
+            return $this->queue;
+        } else {
+            $className = static::class;
+            $pos = strrpos($className, '\\');
+            if ($pos !== false) {
+                $className = substr($className, $pos + 1);
+            }
+            return ucfirst(preg_replace('/([a-z])([A-Z])/', '$1-$2', $className));
         }
-        return ucfirst(preg_replace('/([a-z])([A-Z])/', '$1-$2', $className));
     }
 
     /***
@@ -161,8 +161,7 @@ abstract class AbstractJob implements ShouldQueue
      */
     public function prepare()
     {
-        $this->setQueue()
-            ->setConnection();
+        $this->setQueue()->setConnection();
         if ($this->delay) {
             $this->createAmqpQueue($this->getAmqpObj());
         }
