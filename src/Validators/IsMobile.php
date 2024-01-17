@@ -19,7 +19,7 @@ class IsMobile
      * @return false|int
      * @author SwitchSwitch
      */
-    public function isMobile($attribute, $value, $parameters, $validator)
+    public static function isMobile($attribute, $value, $parameters, $validator)
     {
         return preg_match('#^1\d{10}$#', $value);
     }

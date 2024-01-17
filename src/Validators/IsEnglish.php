@@ -15,7 +15,7 @@ namespace ClearSwitch\DragonBallLaravel\Validators;
  */
 class IsEnglish
 {
-    public function isEnglish($attribute, $value, $parameters, $validator)
+    public static function isEnglish($attribute, $value, $parameters, $validator)
     {
         return preg_match("/^[^\x80-\xff]+$/", $value);
     }

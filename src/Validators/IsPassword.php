@@ -9,7 +9,7 @@ namespace ClearSwitch\DragonBallLaravel\Validators;
  */
 class IsPassword
 {
-    public function isPassword($attribute, $value, $parameters, $validator)
+    public static function isPassword($attribute, $value, $parameters, $validator)
     {
         // 6-16个字符，数字+字母组合
         // return preg_match('#^(?![0-9]+$)(?![a-z]+$)[[:alnum:]]{6,16}$#i', $value);
