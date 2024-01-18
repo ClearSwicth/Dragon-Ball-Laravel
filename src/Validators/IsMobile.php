@@ -1,10 +1,4 @@
 <?php
-/**
- * IsMobile.php
- * 文件描述
- * Created on 2023/11/2 11:04
- * Creat by ClearSwitch
- */
 
 namespace ClearSwitch\DragonBallLaravel\Validators;
 

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace ClearSwitch\DragonBallLaravel\Validators;
 
 /**

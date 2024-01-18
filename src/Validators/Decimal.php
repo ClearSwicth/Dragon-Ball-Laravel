@@ -1,10 +1,4 @@
 <?php
-/**
- * Decimal.php
- * 文件描述
- * Created on 2023/11/2 11:06
- * Creat by ClearSwitch
- */
 
 namespace ClearSwitch\DragonBallLaravel\Validators;
 
