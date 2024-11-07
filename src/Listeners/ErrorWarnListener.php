@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ErrorWarnListener.php
  * 异常发送短信
@@ -9,24 +10,22 @@
 namespace ClearSwitch\DragonBallLaravel\Listeners;
 
 
-//use App\Models\Abnormal;
+
+use ClearSwitch\DragonBallLaravel\Jobs\AbstractJob;
 use ClearSwitch\DragonBallLaravel\Events\ErrorWarnEvent;
 use ClearSwitch\DragonBallLaravel\Traits\Robot;
 use Illuminate\Support\Facades\Redis;
 
-class ErrorWarnListener
+class ErrorWarnListener extends AbstractJob
 {
     use Robot;
 
     /**
-     * Create the event listener.
-     *
-     * @return void
+     * 任务发送到的队列的名称。
+     * @var string|null
      */
-    public function __construct()
-    {
-        //
-    }
+    public $queue = 'Error-Warn';
+
 
     /**
      * @var array 发送的消息的哈希和时间
@@ -50,18 +49,20 @@ class ErrorWarnListener
      */
     public function handle(ErrorWarnEvent $event)
     {
-//        if (!empty($event->message['logistic'])) {
-//            $model = new Abnormal(
-//                [
-//                    'orderId' => $event->message['orderId'],
-//                    'content' => $event->message['logistic']
-//                ]
-//            );
-//            $model->save();
-//        }
-        if ($this->should($event->message)) {
-            $this->qyWeChat($event->message);
-        }
+        print_r($event);
+        //        if (!empty($event->message['logistic'])) {
+        //            $model = new Abnormal(
+        //                [
+        //                    'orderId' => $event->message['orderId'],
+        //                    'content' => $event->message['logistic']
+        //                ]
+        //            );
+        //            $model->save();
+        //        }
+        $this->qyWeChat($event->message);
+        // if ($this->should($event->message)) {
+        //     $this->qyWeChat($event->message);
+        // }
     }
 
     /**
